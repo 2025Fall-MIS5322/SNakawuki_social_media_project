@@ -145,6 +145,7 @@ def friends(request):
     # this is to process all send requests
     if request.method == 'POST' and request.POST.get("send_requests"):
         receivers = request.POST.getlist("send_requests")
+        print(receivers)
         for receiver in receivers:
             receiver_profile = Profile.objects.get(id=receiver)
             Relationship.objects.create(sender=user_profile, receiver=receiver_profile, status='sent')
@@ -152,7 +153,7 @@ def friends(request):
     
     # this is to process all receive requests
     if request.method == 'POST' and request.POST.get("receive_requests"):
-        senders = request.POST.getlist("friend_requests")
+        senders = request.POST.getlist("receive_requests")
         for sender in senders:
             # update the relationship model for the status "accepted"
             Relationship.objects.filter(id=sender).update(status='accepted')
