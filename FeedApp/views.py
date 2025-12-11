@@ -6,9 +6,6 @@ from datetime import datetime, date
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 
-# Import the ListView class
-from django.views.generic import ListView 
-
 
 # Create your views here.
 
@@ -173,15 +170,6 @@ def friends(request):
                 'all_profiles': all_profiles, 'request_received_profiles': request_received_profiles}
     
     return render(request, 'FeedApp/friends.html', context)
-
-# Add this new class definition:
-class AllPostsHomePageView(ListView):
-    """
-    The main public homepage displaying all posts (images/videos).
-    """
-    model = Post
-    template_name = 'FeedApp/home.html' 
-    context_object_name = 'posts'
 
 
 
