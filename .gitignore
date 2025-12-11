@@ -1,2 +1,9 @@
 .venv/
 .vscode/
+
+# Django cache files
+__pycache__/
+*.pyc
+
+# VS Code workspace configuration file
+*.code-workspace
