@@ -7,7 +7,6 @@ from django.conf import settings
 class Profile(models.Model):
     first_name = models.CharField(max_length=200, blank=True)
     last_name = models.CharField(max_length=200, blank=True)
-    
     email = models.EmailField(max_length=300, blank=True)
     dob = models.DateField(null=True, blank=True)
     bio = models.TextField(blank=True)
@@ -31,6 +30,11 @@ class Relationship(models.Model):
     status = models.CharField(max_length=8, choices=STATUS_CHOICES, default='sent')
     created = models.DateTimeField(auto_now=True)
     updated = models.DateTimeField(auto_now_add=True)
+
+    # UPDATED __str__ method
+    def __str__(self):
+        # This will show 'john_doe sent to jane_doe' in the admin
+        return f"{self.sender.user.username} {self.status} to {self.receiver.user.username}"
 
 class Post(models.Model):
     description = models.CharField(max_length=255, blank=True)
