@@ -1,0 +1,80 @@
+<!-- FeedApp/templates/FeedApp/home.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    /* Add your creative CSS here for styling images, videos, and layout */
+    .post-card {
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        margin: 20px auto;
+        padding: 15px;
+        max-width: 600px;
+    }
+
+    .post-media {
+        /* Ensures media (images/videos) fit perfectly within the card width */
+        max-width: 100%;
+        border-radius: 5px;
+        margin-top: 10px;
+        width: 100%;
+        height: auto;
+    }
+
+    .post-header {
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #333;
+    }
+</style>
+
+<div class="feed-container">
+    <h1>Global Social Feed</h1>
+
+    {% for post in posts %}
+    <div class="post-card">
+        <div class="post-header">
+            <!-- Display Author and Date using your field names -->
+            @{{ post.username.username }}
+            <small style="color: #65676b;">({{ post.date_posted|date:"F d, Y, P" }})</small>
+        </div>
+
+        <div class="post-content">
+            <!-- Display Description/Caption using your field name -->
+            <p>{{ post.description }}</p>
+
+            <!-- DYNAMIC MEDIA DISPLAY LOGIC -->
+            {% if post.image %}
+            {% if post.is_video %}
+            <!-- Render as an HTML5 video player -->
+            <video controls class="post-media">
+                <source src="{{ post.image.url }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            {% elif post.is_image %}
+            <!-- Render as a static image -->
+            <img src="{{ post.image.url }}" class="post-media" alt="{{ post.description }}">
+            {% else %}
+            <!-- Fallback for other file types -->
+            <p>Attachment: <a href="{{ post.image.url }}" target="_blank">Download File</a></p>
+            {% endif %}
+            {% endif %}
+        </div>
+        <div class="post-actions">
+            <p>
+                <small>
+                    <!-- Ensure your Like model count works here -->
+                    {{ post.post_likes.count }} likes |
+                    <a href="{% url 'FeedApp:comments' post.id %}">View Comments</a>
+                </small>
+            </p>
+            <!-- A "Like" form/button would go here -->
+        </div>
+    </div>
+    {% empty %}
+    <p>No posts found in the feed. Be the first to share something!</p>
+    {% endfor %}
+</div>
+{% endblock content %}
