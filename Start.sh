@@ -4,5 +4,8 @@
 python manage.py migrate
 
 #Start gunicorn
-gunicorn FeedAppwsgi:application
+gunicorn FeedApp.wsgi:application
+
+
+
 
