@@ -76,9 +76,18 @@
         </div>
     </main>
 
+    <!-- Carousel auto-slide script -->
+    <script>
+        $(document).ready(function () {
+            $('#topCarousel').carousel({
+                interval: 2000, //3 seconds per slide-
+                pause: 'hover' // stop when mouse is over it
+            });
+        });
+    </script>
+
+
 </body>
-
-
 
 
 </html>

@@ -1,8 +1,7 @@
 # Example of a correct definition in forms.py
 from django import forms
-from .models import Post
-from .models import Profile
-from .models import Relationship
+from .models import Post, Profile, Relationship
+
 
 class PostForm(forms.ModelForm):    
     class Meta:

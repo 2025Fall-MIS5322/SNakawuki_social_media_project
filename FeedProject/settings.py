@@ -25,7 +25,10 @@ SECRET_KEY = 'django-insecure-m3zn-=tf0!p!l%zi)h4)2r)1m6sm&@ns@^3)1at#6e)yjmb__r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['snakawuki-social-media-project.onrender.com','127.0.0.1']
+ALLOWED_HOSTS = ['snakawuki-social-media-project.onrender.com',
+                 '127.0.0.1',
+                 'localhost',
+]
 
 
 # Application definition
@@ -47,6 +50,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -125,12 +129,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static'] # Recommended addition for project-level static files
+STATIC_ROOT = [BASE_DIR / 'staticfiles'] # Recommended addition for project-level static files
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# --- MEDIA FILE SETTINGS ---
-# Directory where user uploaded files (images/videos) will be saved
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

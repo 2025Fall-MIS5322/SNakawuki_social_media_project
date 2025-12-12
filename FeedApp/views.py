@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import PostForm,ProfileForm, RelationshipForm
+from .forms import PostForm, ProfileForm, RelationshipForm
 from .models import Post, Comment, Like, Profile, Relationship
 from datetime import datetime, date
 
@@ -13,7 +13,7 @@ from django.http import Http404
 # Django looks for a function called index() in the views.py file. 
 
 def index(request):
-    """The home page for Social Media Project."""
+    """The home page for Feed Project."""
     return render(request, 'FeedApp/index.html')
 
 
@@ -106,7 +106,7 @@ def comments(request, post_id):
     """Show comments for a particular post."""
     if request.method == 'POST' and request.POST.get("btn1"):
         comment = request.POST.get("comment")
-        Comment.objects.create(post_id=post_id,username=request.user,text=comment,date_added=date.today())
+        Comment.objects.create(post_id=post_id, username=request.user, text=comment, date_added=date.today())
 
     comments = Comment.objects.filter(post=post_id)
     post = Post.objects.get(id=post_id)
