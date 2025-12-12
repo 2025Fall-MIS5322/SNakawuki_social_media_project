@@ -13,7 +13,7 @@
         <tr style="border: 1px solid black;padding: 6px;">
             <td> {{p.username}}:&nbsp {{ p }} <br>
                 {% if p.image %}
-                <img src="{{p.image.url}}" class="img-thumbnail" style"max-height:300px" alt="">
+                <img src="{{p.image.url}}" class="img-thumbnail" style="max-height:300px" alt="">
                 {% endif %}
             </td>
         <tr style="border: 1px solid black; padding: 6px;">
@@ -25,7 +25,7 @@
             </td>
             <td>Comments: &nbsp <a href="{% url 'FeedApp:comments' p.id %}">{{c}}</a></td>
         </tr>
-        </tr>
+
         {% endfor %}
 
 
