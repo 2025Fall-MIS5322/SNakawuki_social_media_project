@@ -118,7 +118,8 @@ def comments(request, post_id):
 @login_required
 def friends(request):
     admin_profile = Profile.objects.get(user=1)  # Assuming user with ID 1 is the admin
-    user_profile = Profile.objects.get(user=request.user)
+    if not Profile.objects.filter(user=request.user).exists():
+        user_profile = Profile.objects.get(user=request.user)
 
     # to get my friends
     user_friends = user_profile.friends.all()
